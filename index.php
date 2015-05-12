@@ -10,7 +10,7 @@ define('clientSecret', 'dcbb59f487c6411d91a3810ae057a80f');
 define('redirectURI', 'http://localhost/projectJP/index.php');
 define('ImageDirectory', 'pics/');
 
-if isset(($_GET['code'])){
+if (isset($_GET['code'])){
 	$code = ($_GET['code']);
 	$url = 'https://api.instagram.com/oauth/access_token';
 	$access_token_settings = array('client_id' => clientID,
