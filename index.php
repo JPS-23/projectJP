@@ -26,9 +26,14 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, $access_token_settings);//setting the POS
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);//setting it equal to 1 because we are getting strings back
 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);//but in live work-production we want to set this to true
 
-}
+
 $result = curl_exec($curl);//the information in lines 24-27 is stored in here
 curl_close();
+
+$results = json_decode($reslut, true);
+echo $results['user']['username'];
+}
+else {
 ?>
 
 <!DOCTYPE html>
@@ -49,3 +54,6 @@ curl_close();
 		<script src="js/main.js"></script>
 	</body>
 </html>
+<?php
+}
+?>
