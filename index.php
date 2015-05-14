@@ -15,7 +15,7 @@ function connectToInstagram($url){
 	$ch = curl_init();
 
 	curl_setopt_array($ch, array(
-			CURLOPT_URL => $url;
+			CURLOPT_URL => $url,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_SSL_VERIFYPEER => false,
 			CURLOPT_SSL_VERIFYHOST => 2,
@@ -23,6 +23,14 @@ function connectToInstagram($url){
 		$result = curl_exec($ch);
 		curl_close($ch);
 		return $result;
+}
+//Function to get userID cause userName doesn't allow us to get pictures!
+function getUserId($userName){
+	$url = 'http://api.instagram.com/v1.users/search?='.$userName.'&client_id='.clientID;
+	$instagramInfo = connectToInstagram($url);
+	$results = json_decode($instagramInfo, true);
+
+	echo $results['data']['0']['id']
 }
 
 if (isset($_GET['code'])){
@@ -45,8 +53,8 @@ curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);//but in live work-production 
 $result = curl_exec($curl);//the information in lines 24-27 is stored in here
 curl_close();
 
-$results = json_decode($reslut, true);
-echo $results['user']['username'];
+$results = json_decode($result, true);
+getUserID($results['user']['username']);
 }
 else {
 ?>
