@@ -30,7 +30,7 @@ function getUserId($userName){
 	$instagramInfo = connectToInstagram($url);
 	$results = json_decode($instagramInfo, true);
 
-	echo $results['data']['0']['id']
+	return $results['data']['0']['id'];
 }
 
 if (isset($_GET['code'])){
@@ -51,7 +51,7 @@ curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);//but in live work-production 
 
 
 $result = curl_exec($curl);//the information in lines 24-27 is stored in here
-curl_close();
+curl_close($curl);
 
 $results = json_decode($result, true);
 getUserID($results['user']['username']);
